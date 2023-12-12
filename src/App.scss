@@ -1,0 +1,136 @@
+@mixin hover {
+  color: hsl(178, 100%, 50%);
+  cursor: pointer;
+}
+@mixin pseudo {
+  aspect-ratio: 1;
+  vertical-align: bottom;
+  display: inline-block;
+  margin-right: 5px;
+}
+.card-container {
+  background-color: hsl(217, 54%, 11%);
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  .card {
+    width: min(calc(100% - 12px), 350px);
+    background-color: hsl(216, 50%, 16%);
+    border-radius: 16px;
+    padding: 20px;
+    .card-header {
+      position: relative;
+      img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 1/1;
+        transition: 0.5s ease;
+        backface-visibility: hidden;
+        border-radius: 12px;
+      }
+
+      .middle {
+        transition: 0.5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        display: grid;
+        place-items: center;
+        img {
+          width: 50px;
+          aspect-ratio: 1/1;
+        }
+      }
+    }
+    .card-header:hover {
+      cursor: pointer;
+      .middle {
+        opacity: 1;
+        background-color: rgba(0, 255, 247, 0.5);
+      }
+    }
+    .card-body {
+      h2 {
+        color: hsl(0, 0%, 100%);
+        font-weight: 600;
+        transition: 0.5s ease;
+      }
+      h2:hover {
+        @include hover;
+      }
+      p {
+        font-size: 18px;
+        font-weight: 300;
+        color: hsl(215, 51%, 70%);
+      }
+      div {
+        display: flex;
+        justify-content: space-between;
+        .eth {
+          color: hsl(178, 100%, 50%);
+          font-weight: 400;
+        }
+        .eth::before {
+          content: "";
+          width: 12px;
+          height: 20px;
+          background: url("./assets/images/icon-ethereum.svg") center center/100% 100% no-repeat;
+          @include pseudo;
+        }
+        .days {
+          font-weight: 400;
+          color: hsl(215, 51%, 70%);
+        }
+        .days::before {
+          content: "";
+          width: 20px;
+          height: 20px;
+          background: url("./assets/images/icon-clock.svg") center center/100% 100% no-repeat;
+          @include pseudo;
+        }
+      }
+    }
+    hr {
+      height: 1px;
+      background-color: hsl(215, 32%, 27%);
+      margin: 20px 0px;
+      border: none;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      img {
+        width: 40px;
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        border: 1px solid hsl(0, 0%, 100%);
+      }
+      div {
+        display: flex;
+        gap: 5px;
+        font-weight: 400;
+        color: hsl(215, 51%, 70%);
+        .name {
+          color: hsl(0, 0%, 100%);
+          transition: 0.5s ease;
+        }
+        .name:hover {
+          @include hover;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .card-container {
+    .card {
+      width: min(calc(100% - 12px), 300px);
+    }
+  }
+}
